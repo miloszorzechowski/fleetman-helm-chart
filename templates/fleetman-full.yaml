@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp
+  name: {{ .Release.Name }}-webapp
 spec:
   selector:
     matchLabels:
@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: fleetman-webapp
+  name: {{ .Release.Name }}-fleetman-webapp
 
 spec:
   selector:
@@ -33,14 +33,14 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: IngressClass
 metadata:
-  name: nginx
+  name: {{ .Release.Name }}-nginx
 spec:
   controller: k8s.io/ingress-nginx
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: basic-routing
+  name: {{ .Release.Name }}-basic-routing
 spec:
   ingressClassName: nginx
   rules:
